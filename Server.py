@@ -11,18 +11,24 @@ while True:
 
     try:
         message = connectionSocket.recv(1024)
+        if len(message) < 1: continue
         filename = message.split()[1]
         f = open(filename[1:], "rb")
         outputdata = f.read()
         print ("After reading")
         #send one http header line into socket
-        connectionSocket.send(bytes("HTTP/1.1 200 OK\r\n\r\n", "UTF-8"))
+        header = "HTTP/1.1 200 OK\r\n\r\n"
+        headerBytes = bytes(header, "UTF-8")
+        connectionSocket.send(headerBytes)
         for i in range(0, len(outputdata)):
             connectionSocket.send(outputdata[i:i+1])
         connectionSocket.send(b'\r\n\r\n')
         connectionSocket.close()
     except IOError:
         #file not found
+        header = "404 Not Found\r\n\r\n"
+        headerBytes = bytes(header, "UTF-8")
+        connectionSocket.send(headerBytes)
         print("file not found")
         connectionSocket.close()
 
