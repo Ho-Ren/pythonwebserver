@@ -12,10 +12,16 @@ try:
     header = "GET /" + filename + " HTTP/1.1\r\n\r\n"
     headerBytes = bytes(header, "UTF-8")
     clientSocket.send(headerBytes)
-    print (clientSocket.recv(4096))
-    clientSocket.close()
 
+    response = clientSocket.recv(1024)
+    print (response)
+
+    while response:
+        response = clientSocket.recv(1024)
+        print (response)
+
+    clientSocket.close()
 except IOError:
-    exit(1)
+    print("ERROR")
 
 

@@ -1,7 +1,7 @@
 from socket import *
 serverSocket = socket (AF_INET, SOCK_STREAM)
 #prepare a server socket
-serverSocket.bind(('localhost', 80))
+serverSocket.bind(('localhost', 1026))
 serverSocket.listen(5)
 
 while True:
@@ -19,9 +19,11 @@ while True:
         outputdata = f.read()
         print ("After reading: " + str(outputdata))
         #send one http header line into socket
+
         header = "HTTP/1.1 200 OK\r\n\r\n"
         headerBytes = bytes(header, "UTF-8")
         connectionSocket.send(headerBytes)
+
         for i in range(0, len(outputdata)):
             connectionSocket.send(outputdata[i:i+1])
         connectionSocket.send(b'\r\n\r\n')
