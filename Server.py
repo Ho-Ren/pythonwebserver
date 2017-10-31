@@ -1,7 +1,7 @@
 from socket import *
 serverSocket = socket (AF_INET, SOCK_STREAM)
 #prepare a server socket
-serverSocket.bind(('localhost', 1026))
+serverSocket.bind(('localhost', 80))
 serverSocket.listen(5)
 
 while True:
