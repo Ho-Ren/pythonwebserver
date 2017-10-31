@@ -14,12 +14,16 @@ try:
     clientSocket.send(headerBytes)
 
     response = clientSocket.recv(1024)
+    print(type(response))
     print (response)
 
+
+    message = ""
     while response:
         response = clientSocket.recv(1024)
-        print (response)
+        message += str(response)
 
+    print(message)
     clientSocket.close()
 except IOError:
     print("ERROR")
