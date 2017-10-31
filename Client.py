@@ -8,9 +8,8 @@ filename = sys.argv[3]
 try:
     clientSocket = socket(AF_INET, SOCK_STREAM)
     server_port = int(server_port)
-    clientSocket.connect(server_host, int(server_port))
-
-    header = "GET " + filename + "HTTP/1.1\r\n\r\n"
+    clientSocket.connect(("localhost", server_port))
+    header = "GET /" + filename + " HTTP/1.1\r\n\r\n"
     headerBytes = bytes(header, "UTF-8")
     clientSocket.send(headerBytes)
     print (clientSocket.recv(4096))

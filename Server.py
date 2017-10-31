@@ -13,7 +13,7 @@ while True:
         message = connectionSocket.recv(1024)
         if len(message) < 1: continue
         filename = message.split()[1]
-        print("Opening file")
+        print("Opening file: " + str(filename))
         f = open(filename[1:], "rb")
         outputdata = f.read()
         print ("After reading")
@@ -28,7 +28,7 @@ while True:
         print("Success")
     except IOError:
         #file not found
-        header = "HTTP/1.1 404 Not Found\r\n\r\n"
+        header = "HTTP/1.1 404 Not Found\r\n"
         headerBytes = bytes(header, "UTF-8")
         connectionSocket.send(headerBytes)
         print("file not found")
