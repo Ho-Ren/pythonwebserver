@@ -28,7 +28,7 @@ while True:
         print("Success")
     except IOError:
         #file not found
-        header = "404 Not Found\r\n\r\n"
+        header = "HTTP/1.1 404 Not Found\r\n\r\n"
         headerBytes = bytes(header, "UTF-8")
         connectionSocket.send(headerBytes)
         print("file not found")
