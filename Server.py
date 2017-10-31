@@ -11,12 +11,13 @@ while True:
 
     try:
         message = connectionSocket.recv(1024)
+        print("Message: " + str(message))
         if len(message) < 1: continue
         filename = message.split()[1]
         print("Opening file: " + str(filename))
         f = open(filename[1:], "rb")
         outputdata = f.read()
-        print ("After reading")
+        print ("After reading: " + str(outputdata))
         #send one http header line into socket
         header = "HTTP/1.1 200 OK\r\n\r\n"
         headerBytes = bytes(header, "UTF-8")
